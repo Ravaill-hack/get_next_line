@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 11:31:03 by lmatkows          #+#    #+#             */
-/*   Updated: 2024/11/12 16:02:24 by lmatkows         ###   ########.fr       */
+/*   Updated: 2024/11/12 17:04:53 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ char	*get_next_line(int fd)
 	int			i;
 
 	i = 0;
+	ret = -1;
 	if (fd == -1)
 		return (NULL);
 	line = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
@@ -32,7 +33,7 @@ char	*get_next_line(int fd)
 	if (ret == 0)
 	{
 		free (line);
-		return (NULL);	
+		return (NULL);
 	}
 	line[i] = '\0';
 	return (line);
@@ -47,9 +48,7 @@ int main (void)
 	fd = open("Test.txt", O_RDONLY);
 	printf("%s",get_next_line(fd));
 	printf("%s",get_next_line(fd));
-	printf("%s",get_next_line(fd));
-	printf("%s",get_next_line(fd));
-	printf("%s",get_next_line(fd));
-	//printf("%s", get_next_line(fd));
+	printf("%d\n",fd);
+	close(fd);
 }
 */
