@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 10:14:27 by Lmatkows          #+#    #+#             */
-/*   Updated: 2024/11/12 13:49:39 by lmatkows         ###   ########.fr       */
+/*   Updated: 2024/11/12 17:34:03 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdlib.h>
-
-# define BUFFER_SIZE 1000
-
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1
+# endif
 char	*get_next_line(int fd);
 
 #endif
