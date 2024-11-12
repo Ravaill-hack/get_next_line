@@ -1,0 +1,4 @@
+Bonjour ceci est un test
+qui permet de savoir si
+la fonction get_next_line
+fonctionne correctement.
