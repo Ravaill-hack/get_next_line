@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 11:31:03 by lmatkows          #+#    #+#             */
-/*   Updated: 2024/11/12 11:52:42 by lmatkows         ###   ########.fr       */
+/*   Updated: 2024/11/12 12:13:46 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,13 @@
 char	*get_next_line(int fd)
 {
 	int		fd;
-	char	*path;
+	int		len_ln;
 	void	buf[BUFFER_SIZE + 1];
 
-	fd = open(path);
+	fd = open("Test.txt", O_RDONLY);
 	if (fd == -1)
 		return (NULL);
-	while (buf[i] != '\n')
-	{
-		read(fd, buf, sizeof(char));
-		i ++;
-	}
+	len_ln = read(fd, buf, BUFFER_SIZE);
+	buf[len_ln] = '\0';
 	return (buf);
 }
