@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 11:31:03 by lmatkows          #+#    #+#             */
-/*   Updated: 2024/11/12 14:39:12 by lmatkows         ###   ########.fr       */
+/*   Updated: 2024/11/12 16:02:24 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 char	*get_next_line(int fd)
 {
-	int		ret;
-	char	*line;
-	int		i;
+	int			ret;
+	static char	*line;
+	int			i;
 
 	i = 0;
 	if (fd == -1)
@@ -30,7 +30,10 @@ char	*get_next_line(int fd)
 		i ++;
 	}
 	if (ret == 0)
-		return (NULL);
+	{
+		free (line);
+		return (NULL);	
+	}
 	line[i] = '\0';
 	return (line);
 }
