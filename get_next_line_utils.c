@@ -6,7 +6,7 @@
 /*   By: Lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 10:30:07 by lmatkows          #+#    #+#             */
-/*   Updated: 2024/11/13 14:23:46 by Lmatkows         ###   ########.fr       */
+/*   Updated: 2024/11/13 21:17:49 by Lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,15 @@ char	*ft_substrfrom(char *str, char c)
 	while (str[i] != '\0')
 		i ++;
 	dest = (char *)malloc((i - start + 1) * sizeof(char));
+	if (!dest)
+		return (NULL);
 	while (str[start] != '\0')
 	{
 		dest[j] = str[start];
 		start ++;
 		j ++;
 	}
-	dest[i] = '\0';
+	dest[j] = '\0';
 	return (dest);
 }
 

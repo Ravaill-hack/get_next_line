@@ -6,7 +6,7 @@
 /*   By: Lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 10:14:27 by Lmatkows          #+#    #+#             */
-/*   Updated: 2024/11/13 14:24:01 by Lmatkows         ###   ########.fr       */
+/*   Updated: 2024/11/13 20:53:04 by Lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # endif
 
 char	*get_next_line(int fd);
+void	*ft_memset(void	*adr, int c, size_t len);
 int		ft_strchr(char *str, char c);
 char	*ft_substrfrom(char *str, char c);
 char	*ft_substrto(char *str, char c);
