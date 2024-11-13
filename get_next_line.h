@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 10:14:27 by Lmatkows          #+#    #+#             */
-/*   Updated: 2024/11/12 17:34:03 by lmatkows         ###   ########.fr       */
+/*   Updated: 2024/11/13 11:57:55 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,14 @@
 # include <fcntl.h>
 # include <stdlib.h>
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
+#  define BUFFER_SIZE 4
 # endif
+
 char	*get_next_line(int fd);
+int		ft_strchr(char *str, char c);
+char	*ft_substrfrom(char	*str, char	c);
+char	*ft_substrto(char	*str, char	c);
+int		ft_strlen(char *s);
+char	*ft_strjoin(char *s1, char *s2);
 
 #endif

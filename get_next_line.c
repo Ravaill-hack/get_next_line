@@ -6,11 +6,12 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 11:31:03 by lmatkows          #+#    #+#             */
-/*   Updated: 2024/11/13 10:48:59 by lmatkows         ###   ########.fr       */
+/*   Updated: 2024/11/13 12:00:25 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h>
 
 char	*get_next_line(int fd)
 {
@@ -29,29 +30,27 @@ char	*get_next_line(int fd)
 	while ((ft_strchr(line, '\n') == -1) && (ind != 0))
 	{
 		buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
+		if (!buffer)
+			return (NULL);
 		ind = read(fd, buffer, BUFFER_SIZE);
 		line = ft_strjoin(line, buffer);
 		//free(buffer);
 	}
-	ret = ft_strjoin(toomuchread, substrto(line, '\n'));
-	toomuchread = susbtrfrom(line, '\n');
+	ret = ft_strjoin(toomuchread, ft_substrto(line, '\n'));
+	ret = ft_strjoin(ret, "\n");
+	toomuchread = ft_substrfrom(line, '\n');
 	return (ret);
 }
 
-#include <stdio.h>
+
 
 int main (void)
 {
 	int		fd;
-
 	fd = open("Test.txt", O_RDONLY);
-	printf("%s",get_next_line(fd));
-	printf("%s",get_next_line(fd));
-	printf("%s",get_next_line(fd));
-	printf("%s",get_next_line(fd));
-	printf("%s",get_next_line(fd));
-	printf("%s",get_next_line(fd));
-	printf("%d\n",fd);
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
 	close(fd);
 }
 
