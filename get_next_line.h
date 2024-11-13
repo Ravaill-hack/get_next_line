@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: Lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 10:14:27 by Lmatkows          #+#    #+#             */
-/*   Updated: 2024/11/13 11:57:55 by lmatkows         ###   ########.fr       */
+/*   Updated: 2024/11/13 14:24:01 by Lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 
 char	*get_next_line(int fd);
 int		ft_strchr(char *str, char c);
-char	*ft_substrfrom(char	*str, char	c);
-char	*ft_substrto(char	*str, char	c);
+char	*ft_substrfrom(char *str, char c);
+char	*ft_substrto(char *str, char c);
 int		ft_strlen(char *s);
 char	*ft_strjoin(char *s1, char *s2);
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: Lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 11:31:03 by lmatkows          #+#    #+#             */
-/*   Updated: 2024/11/13 12:00:25 by lmatkows         ###   ########.fr       */
+/*   Updated: 2024/11/13 14:21:45 by Lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,11 @@
 char	*get_next_line(int fd)
 {
 	int			ind;
-	int			i;
 	static char	*line = NULL;
-	static char *toomuchread = NULL;
+	static char	*toomuchread = NULL;
 	char		*buffer;
 	char		*ret;
 
-	i = 0;
 	ind = -1;
 	line = NULL;
 	if (fd == -1)
@@ -34,16 +32,13 @@ char	*get_next_line(int fd)
 			return (NULL);
 		ind = read(fd, buffer, BUFFER_SIZE);
 		line = ft_strjoin(line, buffer);
-		//free(buffer);
 	}
 	ret = ft_strjoin(toomuchread, ft_substrto(line, '\n'));
 	ret = ft_strjoin(ret, "\n");
 	toomuchread = ft_substrfrom(line, '\n');
 	return (ret);
 }
-
-
-
+/*
 int main (void)
 {
 	int		fd;
@@ -53,4 +48,4 @@ int main (void)
 	printf("%s", get_next_line(fd));
 	close(fd);
 }
-
+*/

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: Lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 10:30:07 by lmatkows          #+#    #+#             */
-/*   Updated: 2024/11/13 11:45:54 by lmatkows         ###   ########.fr       */
+/*   Updated: 2024/11/13 14:23:46 by Lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int	ft_strchr(char *str, char c)
 	}
 	return (-1);
 }
-char	*ft_substrfrom(char	*str, char	c)
+
+char	*ft_substrfrom(char *str, char c)
 {
 	int		i;
 	int		j;
@@ -54,15 +55,13 @@ char	*ft_substrfrom(char	*str, char	c)
 	return (dest);
 }
 
-char	*ft_substrto(char	*str, char	c)
+char	*ft_substrto(char *str, char c)
 {
 	int		i;
-	int		j;
 	int		end;
 	char	*dest;
 
 	i = 0;
-	j = 0;
 	dest = NULL;
 	while ((str[i] != c) && (str[i] != '\0'))
 		i++;
