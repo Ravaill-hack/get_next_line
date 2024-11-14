@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 11:31:03 by lmatkows          #+#    #+#             */
-/*   Updated: 2024/11/14 13:29:08 by lmatkows         ###   ########.fr       */
+/*   Updated: 2024/11/14 16:34:00 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,10 @@ char	*get_next_line(int fd)
 	ind = -1;
 	rawline = NULL;
 	if (fd == -1 || BUFFER_SIZE <= 0)
-		return (NULL);
+	{
+		free(toomuchread);
+		return (NULL);	
+	}
 	while ((ft_strchr(rawline, '\n') == -1) && (ind != 0))
 	{
 		buffer = ft_calloc(BUFFER_SIZE);
@@ -60,11 +63,14 @@ char	*get_next_line(int fd)
 		temp = rawline;
 		rawline = ft_strjoin(rawline, buffer);
 		free(temp);
-		//free(buffer);
+		free(buffer);
 	}
-	line = ft_substrto(rawline, '\n');
-	line = ft_strjoin(toomuchread, line);
+	temp = ft_substrto(rawline, '\n');
+	line = ft_strjoin(toomuchread, temp);
+	free(temp);
+	temp = line;
 	line = ft_strjoin(line, "\n");
+	free(temp);
 	free(toomuchread);
 	toomuchread = ft_substrfrom(rawline, '\n');
 	free(rawline);

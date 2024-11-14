@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 10:30:07 by lmatkows          #+#    #+#             */
-/*   Updated: 2024/11/14 13:12:06 by lmatkows         ###   ########.fr       */
+/*   Updated: 2024/11/14 16:19:40 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,22 +93,25 @@ int	ft_strlen(char *s)
 char	*ft_strjoin(char *s1, char *s2)
 {
 	int		i;
+	int		len1;
 	char	*ret;
 
 	i = 0;
-	if (s1 == NULL)
-		return (s2);
-	ret = (char *)malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
+	if(s1 == NULL)
+		len1 = 0;
+	else
+		len1 = ft_strlen(s1);
+	ret = (char *)malloc((len1 + ft_strlen(s2) + 1) * sizeof(char));
 	if (!ret)
 		return (NULL);
-	while (i < ft_strlen(s1))
+	while (i < len1)
 	{
 		ret[i] = s1[i];
 		i++;
 	}
-	while (i < (ft_strlen(s1) + ft_strlen(s2)))
+	while (i < (len1 + ft_strlen(s2)))
 	{
-		ret[i] = s2[i - ft_strlen(s1)];
+		ret[i] = s2[i - len1];
 		i ++;
 	}
 	ret[i] = '\0';
