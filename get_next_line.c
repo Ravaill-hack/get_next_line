@@ -6,14 +6,14 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 11:31:03 by lmatkows          #+#    #+#             */
-/*   Updated: 2024/11/14 11:41:19 by lmatkows         ###   ########.fr       */
+/*   Updated: 2024/11/14 13:29:08 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdio.h>
 
-void	*ft_memset(void	*adr, int c, size_t len)
+char	*ft_memset(void	*adr, int c, size_t len)
 {
 	size_t			i;
 	unsigned char	*str;
@@ -28,26 +28,16 @@ void	*ft_memset(void	*adr, int c, size_t len)
 	return (adr);
 }
 
-void	*ft_calloc(size_t nmemb, size_t size)
+char	*ft_calloc(size_t size)
 {
-	void	*tab;
+	char	*tab;
 
-	if ((nmemb == 0) || (size == 0))
-	{
-		nmemb = 0;
-		size = 0;
-	}
-	tab = malloc(nmemb * size);
+	tab = (char *)malloc((size + 1) * sizeof(char));
 	if (tab == 0)
 		return (NULL);
-	ft_memset(tab, 0, nmemb * size);
+	ft_memset(tab, 0, size);
 	return (tab);
 }
-
-//char	*assembly_line(char *toomuchread, char *rawline)
-//{
-//	
-//}
 
 char	*get_next_line(int fd)
 {
@@ -64,11 +54,13 @@ char	*get_next_line(int fd)
 		return (NULL);
 	while ((ft_strchr(rawline, '\n') == -1) && (ind != 0))
 	{
-		buffer = ft_calloc(1, BUFFER_SIZE + 1);
+		buffer = ft_calloc(BUFFER_SIZE);
 		ind = read(fd, buffer, BUFFER_SIZE);
+		buffer[BUFFER_SIZE] = '\0';
 		temp = rawline;
 		rawline = ft_strjoin(rawline, buffer);
 		free(temp);
+		//free(buffer);
 	}
 	line = ft_substrto(rawline, '\n');
 	line = ft_strjoin(toomuchread, line);
@@ -78,7 +70,6 @@ char	*get_next_line(int fd)
 	free(rawline);
 	return (line);
 }
-
 
 int main (void)
 {
