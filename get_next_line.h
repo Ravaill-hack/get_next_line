@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 10:14:27 by Lmatkows          #+#    #+#             */
-/*   Updated: 2024/11/14 13:28:59 by lmatkows         ###   ########.fr       */
+/*   Updated: 2024/11/14 17:16:02 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@ char	*ft_substrto(char *str, char c);
 int		ft_strlen(char *s);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_calloc(size_t size);
+//void	*cat_and_free(char *rawline, char *toomuchread, char *line);
 
 #endif

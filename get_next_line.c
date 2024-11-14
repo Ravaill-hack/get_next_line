@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 11:31:03 by lmatkows          #+#    #+#             */
-/*   Updated: 2024/11/14 16:34:00 by lmatkows         ###   ########.fr       */
+/*   Updated: 2024/11/14 17:23:46 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,23 @@ char	*ft_calloc(size_t size)
 	return (tab);
 }
 
+/*
+void	*cat_and_free(char *rwl, char *tmr, char *ln)
+{
+	char	*temp1;
+
+	temp1 = ft_substrto(rwl, '\n');
+	ln = ft_strjoin(tmr, temp1);
+	free(temp1);
+	temp1 = ln;
+	ln = ft_strjoin(ln, "\n");
+	free(temp1);
+	free(tmr);
+	tmr = ft_substrfrom(rwl, '\n');
+	free(rwl);
+}
+*/
+
 char	*get_next_line(int fd)
 {
 	int			ind;
@@ -65,6 +82,7 @@ char	*get_next_line(int fd)
 		free(temp);
 		free(buffer);
 	}
+	//cat_and_free(rawline, toomuchread, line);
 	temp = ft_substrto(rawline, '\n');
 	line = ft_strjoin(toomuchread, temp);
 	free(temp);
@@ -83,6 +101,15 @@ int main (void)
 	char	*line;
 
 	fd = open("Test.txt", O_RDONLY);
+	line = get_next_line(fd);
+	printf("%s", line);
+	free(line);
+	line = get_next_line(fd);
+	printf("%s", line);
+	free(line);
+	line = get_next_line(fd);
+	printf("%s", line);
+	free(line);
 	line = get_next_line(fd);
 	printf("%s", line);
 	free(line);
