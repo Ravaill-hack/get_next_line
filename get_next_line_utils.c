@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 10:30:07 by lmatkows          #+#    #+#             */
-/*   Updated: 2024/11/13 21:17:49 by Lmatkows         ###   ########.fr       */
+/*   Updated: 2024/11/14 11:19:55 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ char	*ft_substrfrom(char *str, char c)
 	dest = NULL;
 	while ((str[i] != c) && (str[i] != '\0'))
 		i++;
-	i++;
+	if (str[i] == c)
+		i ++;
 	start = i;
 	while (str[i] != '\0')
 		i ++;
@@ -60,21 +61,21 @@ char	*ft_substrfrom(char *str, char c)
 char	*ft_substrto(char *str, char c)
 {
 	int		i;
-	int		end;
 	char	*dest;
 
 	i = 0;
-	dest = NULL;
 	while ((str[i] != c) && (str[i] != '\0'))
 		i++;
-	end = i - 1;
-	dest = (char *)malloc((end + 2) * sizeof(char));
+	dest = (char *)malloc((i+1) * sizeof(char));
+	if(!dest)
+		return (NULL);
 	i = 0;
 	while ((str[i] != '\0') && (str[i] != c))
 	{
 		dest[i] = str[i];
 		i ++;
 	}
+	//free(str);
 	dest[i] = '\0';
 	return (dest);
 }
@@ -92,26 +93,22 @@ int	ft_strlen(char *s)
 char	*ft_strjoin(char *s1, char *s2)
 {
 	int		i;
-	int		len1;
-	int		len2;
 	char	*ret;
 
 	i = 0;
 	if (s1 == NULL)
 		return (s2);
-	len1 = ft_strlen(s1);
-	len2 = ft_strlen(s2);
-	ret = (char *)malloc((len1 + len2 + 1) * sizeof(char));
+	ret = (char *)malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
 	if (!ret)
 		return (NULL);
-	while (i < len1)
+	while (i < ft_strlen(s1))
 	{
 		ret[i] = s1[i];
 		i++;
 	}
-	while (i < (len1 + len2))
+	while (i < (ft_strlen(s1) + ft_strlen(s2)))
 	{
-		ret[i] = s2[i - len1];
+		ret[i] = s2[i - ft_strlen(s1)];
 		i ++;
 	}
 	ret[i] = '\0';

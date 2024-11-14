@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 11:31:03 by lmatkows          #+#    #+#             */
-/*   Updated: 2024/11/13 21:23:42 by Lmatkows         ###   ########.fr       */
+/*   Updated: 2024/11/14 11:41:19 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,46 +28,70 @@ void	*ft_memset(void	*adr, int c, size_t len)
 	return (adr);
 }
 
+void	*ft_calloc(size_t nmemb, size_t size)
+{
+	void	*tab;
+
+	if ((nmemb == 0) || (size == 0))
+	{
+		nmemb = 0;
+		size = 0;
+	}
+	tab = malloc(nmemb * size);
+	if (tab == 0)
+		return (NULL);
+	ft_memset(tab, 0, nmemb * size);
+	return (tab);
+}
+
+//char	*assembly_line(char *toomuchread, char *rawline)
+//{
+//	
+//}
+
 char	*get_next_line(int fd)
 {
 	int			ind;
-	char		*line;
+	char		*rawline;
 	static char	*toomuchread = NULL;
-	static char	*readok = NULL;
 	char		*buffer;
-	char		*ret;
+	char		*line;
+	char 		*temp;
 
 	ind = -1;
-	line = NULL;
-	if (fd == -1)
+	rawline = NULL;
+	if (fd == -1 || BUFFER_SIZE <= 0)
 		return (NULL);
-	while ((ft_strchr(line, '\n') == -1) && (ind != 0))
+	while ((ft_strchr(rawline, '\n') == -1) && (ind != 0))
 	{
-		buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
-		if (!buffer)
-			return (NULL);
-		ft_memset(buffer, 0, BUFFER_SIZE + 1);
+		buffer = ft_calloc(1, BUFFER_SIZE + 1);
 		ind = read(fd, buffer, BUFFER_SIZE);
-		line = ft_strjoin(line, buffer);
+		temp = rawline;
+		rawline = ft_strjoin(rawline, buffer);
+		free(temp);
 	}
-	free(readok);
-	readok = ft_substrto(line, '\n');
-	ret = ft_strjoin(toomuchread, readok);
+	line = ft_substrto(rawline, '\n');
+	line = ft_strjoin(toomuchread, line);
+	line = ft_strjoin(line, "\n");
 	free(toomuchread);
-	ret = ft_strjoin(ret, "\n");
-	toomuchread = ft_substrfrom(line, '\n');
-	free(buffer);
-	return (ret);
+	toomuchread = ft_substrfrom(rawline, '\n');
+	free(rawline);
+	return (line);
 }
 
-/*
+
 int main (void)
 {
 	int		fd;
+	char	*line;
+
 	fd = open("Test.txt", O_RDONLY);
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
+	line = get_next_line(fd);
+	printf("%s", line);
+	free(line);
+	line = get_next_line(fd);
+	printf("%s", line);
+	free(line);
 	close(fd);
 }
-*/
+
