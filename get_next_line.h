@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 10:14:27 by Lmatkows          #+#    #+#             */
-/*   Updated: 2024/11/14 17:16:02 by lmatkows         ###   ########.fr       */
+/*   Updated: 2024/11/18 13:47:12 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,21 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdlib.h>
+# ifdef BUFFER_SIZE
+#  if BUFFER_SIZE < 1 || BUFFER_SIZE > 8000000
+#   undef BUFFER_SIZE
+#   define BUFFER_SIZE 4
+#  endif
+# endif
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 4
 # endif
 
 char	*get_next_line(int fd);
-char	*ft_memset(void	*adr, int c, size_t len);
-int		ft_strchr(char *str, char c);
-char	*ft_substrfrom(char *str, char c);
-char	*ft_substrto(char *str, char c);
-int		ft_strlen(char *s);
 char	*ft_strjoin(char *s1, char *s2);
-char	*ft_calloc(size_t size);
-//void	*cat_and_free(char *rawline, char *toomuchread, char *line);
+int		ft_strlen(char *s);
+char	*ft_substrto(char *str, char c);
+char	*ft_substrfrom(char *str, char c);
+int		ft_strchr(char *str, char c);
 
 #endif

@@ -3,119 +3,86 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: Lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 11:31:03 by lmatkows          #+#    #+#             */
-/*   Updated: 2024/11/14 17:23:46 by lmatkows         ###   ########.fr       */
+/*   Updated: 2024/11/18 18:11:30 by Lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
 
-char	*ft_memset(void	*adr, int c, size_t len)
+static char	*read_line(int fd, char *buffer, char *tmr)
 {
-	size_t			i;
-	unsigned char	*str;
+	int		ind;
+	char	*temp;
+	char	*rawline;
 
-	i = 0;
-	str = (unsigned char *)adr;
-	while (i < len)
+	rawline = tmr;
+	ind = 1;
+	while (ft_strchr(rawline, '\n') == -1)
 	{
-		str[i] = (unsigned char)c;
-		i++;
-	}
-	return (adr);
-}
-
-char	*ft_calloc(size_t size)
-{
-	char	*tab;
-
-	tab = (char *)malloc((size + 1) * sizeof(char));
-	if (tab == 0)
-		return (NULL);
-	ft_memset(tab, 0, size);
-	return (tab);
-}
-
-/*
-void	*cat_and_free(char *rwl, char *tmr, char *ln)
-{
-	char	*temp1;
-
-	temp1 = ft_substrto(rwl, '\n');
-	ln = ft_strjoin(tmr, temp1);
-	free(temp1);
-	temp1 = ln;
-	ln = ft_strjoin(ln, "\n");
-	free(temp1);
-	free(tmr);
-	tmr = ft_substrfrom(rwl, '\n');
-	free(rwl);
-}
-*/
-
-char	*get_next_line(int fd)
-{
-	int			ind;
-	char		*rawline;
-	static char	*toomuchread = NULL;
-	char		*buffer;
-	char		*line;
-	char 		*temp;
-
-	ind = -1;
-	rawline = NULL;
-	if (fd == -1 || BUFFER_SIZE <= 0)
-	{
-		free(toomuchread);
-		return (NULL);	
-	}
-	while ((ft_strchr(rawline, '\n') == -1) && (ind != 0))
-	{
-		buffer = ft_calloc(BUFFER_SIZE);
 		ind = read(fd, buffer, BUFFER_SIZE);
-		buffer[BUFFER_SIZE] = '\0';
+		if (ind == -1)
+			return (NULL);
+		if (ind == 0)
+			break ;
+		buffer[ind] = '\0';
 		temp = rawline;
 		rawline = ft_strjoin(rawline, buffer);
 		free(temp);
-		free(buffer);
+		temp = NULL;
 	}
-	//cat_and_free(rawline, toomuchread, line);
-	temp = ft_substrto(rawline, '\n');
-	line = ft_strjoin(toomuchread, temp);
-	free(temp);
-	temp = line;
-	line = ft_strjoin(line, "\n");
-	free(temp);
-	free(toomuchread);
+	if (!rawline || rawline[0] == '\0')
+		return (NULL);
+	return (rawline);
+}
+
+char	*get_next_line(int fd)
+{
+	char		*buffer;
+	char		*rawline;
+	char		*line;
+	static char	*toomuchread = NULL;
+
+	line = NULL;
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
+	buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
+	if (!buffer)
+		return (NULL);
+	rawline = read_line(fd, buffer, toomuchread);
+	free(buffer);
+	buffer = NULL;
+	if (!rawline)
+	{
+		free(rawline);
+		free(toomuchread);
+		toomuchread = NULL;
+		return (NULL);
+	}
+	line = ft_substrto(rawline, '\n');
 	toomuchread = ft_substrfrom(rawline, '\n');
 	free(rawline);
 	return (line);
 }
+/* 
+#include <stdio.h>
 
 int main (void)
 {
 	int		fd;
 	char	*line;
 
-	fd = open("Test.txt", O_RDONLY);
-	line = get_next_line(fd);
-	printf("%s", line);
-	free(line);
-	line = get_next_line(fd);
-	printf("%s", line);
-	free(line);
-	line = get_next_line(fd);
-	printf("%s", line);
-	free(line);
-	line = get_next_line(fd);
-	printf("%s", line);
-	free(line);
+	fd = open("test.txt", O_RDONLY);
+	while ((line = get_next_line(fd)) != NULL)
+	{
+		printf("%s", line);
+		free(line);
+	}
 	line = get_next_line(fd);
 	printf("%s", line);
 	free(line);
 	close(fd);
 }
-
+ */
